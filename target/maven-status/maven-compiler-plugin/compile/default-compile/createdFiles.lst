@@ -1,0 +1,13 @@
+com\university\bookstore\service\AuthorService.class
+com\university\bookstore\exception\GlobalExceptionHandler.class
+com\university\bookstore\config\DataInitializer.class
+com\university\bookstore\repository\BookRepository.class
+com\university\bookstore\controller\AuthorController.class
+com\university\bookstore\service\BookService.class
+com\university\bookstore\repository\AuthorRepository.class
+com\university\bookstore\dto\BookAuthorDTO.class
+com\university\bookstore\entity\Book.class
+com\university\bookstore\BookstoreApplication.class
+com\university\bookstore\entity\Author.class
+com\university\bookstore\controller\HomeController.class
+com\university\bookstore\controller\BookController.class

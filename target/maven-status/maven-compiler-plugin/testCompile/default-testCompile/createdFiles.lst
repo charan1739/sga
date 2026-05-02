@@ -1,0 +1,3 @@
+com\university\bookstore\service\AuthorServiceTest.class
+com\university\bookstore\service\BookServiceTest.class
+com\university\bookstore\repository\BookRepositoryTest.class

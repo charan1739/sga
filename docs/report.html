@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>University Bookstore – Spring Boot Assignment Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;color:#1e293b;background:#fff;font-size:13px;line-height:1.7}
+  .cover{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(135deg,#1e293b,#0f172a);color:#fff;text-align:center;padding:3rem;page-break-after:always}
+  .cover .badge{background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.4);color:#a5b4fc;padding:.4rem 1.2rem;border-radius:20px;font-size:.85rem;margin-bottom:1.5rem;display:inline-block}
+  .cover h1{font-size:2.4rem;font-weight:700;margin-bottom:.5rem;color:#f1f5f9}
+  .cover h2{font-size:1.1rem;font-weight:400;color:#94a3b8;margin-bottom:2.5rem}
+  .cover .meta{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.5rem 2.5rem;margin-top:2rem}
+  .cover .meta p{color:#cbd5e1;margin:.3rem 0;font-size:.95rem}
+  .cover .meta strong{color:#f1f5f9}
+  .toc{padding:3rem 4rem;page-break-after:always;max-width:800px;margin:0 auto}
+  .toc h2{font-size:1.4rem;color:#6366f1;border-bottom:2px solid #e2e8f0;padding-bottom:.5rem;margin-bottom:1.5rem}
+  .toc ol{padding-left:1.5rem}
+  .toc li{margin:.5rem 0;color:#475569;font-size:.95rem}
+  .toc li strong{color:#1e293b}
+  section{padding:2.5rem 4rem;max-width:900px;margin:0 auto;page-break-inside:avoid}
+  section+section{border-top:1px solid #f1f5f9}
+  h2.section-title{font-size:1.3rem;color:#6366f1;margin-bottom:1.2rem;padding-bottom:.4rem;border-bottom:2px solid #e0e7ff;display:flex;align-items:center;gap:.5rem}
+  h3{font-size:1rem;color:#1e293b;margin:1.2rem 0 .5rem;font-weight:600}
+  p{margin-bottom:.8rem;color:#374151}
+  .erd{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem;margin:1rem 0;font-family:'Fira Code',monospace;font-size:.8rem;white-space:pre;line-height:1.6;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+  th{background:#6366f1;color:#fff;padding:.6rem 1rem;text-align:left;font-weight:600}
+  td{padding:.55rem 1rem;border-bottom:1px solid #e2e8f0;color:#374151}
+  tr:nth-child(even) td{background:#f8fafc}
+  .code-block{background:#1e293b;color:#e2e8f0;border-radius:10px;padding:1.2rem 1.5rem;font-family:'Fira Code',monospace;font-size:.78rem;line-height:1.7;margin:1rem 0;overflow-x:auto;white-space:pre}
+  .kw{color:#a78bfa}.cl{color:#34d399}.cm{color:#64748b;font-style:italic}.st{color:#fbbf24}.an{color:#f472b6}
+  .screenshot{width:100%;border-radius:10px;border:1px solid #e2e8f0;box-shadow:0 4px 12px rgba(0,0,0,0.08);margin:1rem 0}
+  .caption{text-align:center;font-size:.78rem;color:#64748b;margin-bottom:1.5rem;font-style:italic}
+  .challenge-box{background:#fef3c7;border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin:1rem 0}
+  .challenge-box h4{color:#92400e;margin-bottom:.4rem;font-size:.9rem}
+  .challenge-box p{color:#78350f;margin:0;font-size:.85rem}
+  .solution-box{background:#ecfdf5;border-left:4px solid #10b981;border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin:1rem 0}
+  .solution-box h4{color:#065f46;margin-bottom:.4rem;font-size:.9rem}
+  .solution-box p{color:#064e3b;margin:0;font-size:.85rem}
+  .layer-card{border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.2rem;margin:.6rem 0}
+  .layer-card h4{color:#6366f1;margin-bottom:.3rem;font-size:.9rem}
+  .layer-card p{margin:0;font-size:.85rem;color:#475569}
+  .github-box{background:linear-gradient(135deg,#1e293b,#0f172a);color:#fff;border-radius:12px;padding:1.5rem;text-align:center;margin:1rem 0}
+  .github-box a{color:#a5b4fc;font-size:1rem;font-weight:600;word-break:break-all}
+  .test-row td:last-child{color:#10b981;font-weight:600}
+  @media print{
+    .cover{min-height:100vh}
+    body{font-size:12px}
+    section{padding:1.8rem 3rem}
+    .code-block{font-size:.72rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="badge">Spring Boot 3 · MySQL · JSP · JUnit 5</div>
+  <h1>University Bookstore</h1>
+  <h2>Full-Stack CRUD Application — Assignment Report</h2>
+  <div class="meta">
+    <p><strong>Module:</strong> Enterprise Application Development</p>
+    <p><strong>Technology Stack:</strong> Spring Boot 3.2 · Spring MVC · Spring Data JPA · MySQL · JSP/JSTL</p>
+    <p><strong>Build Tool:</strong> Apache Maven 3.x</p>
+    <p><strong>Date:</strong> May 2026</p>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li><strong>Entity Relationship Design</strong> – Domain model, ER diagram, JPA mapping strategy</li>
+    <li><strong>Architecture Overview</strong> – Layer-by-layer explanation</li>
+    <li><strong>Implementation Details</strong>
+      <ol style="margin-top:.4rem">
+        <li>Database Setup &amp; Data Initializer</li>
+        <li>Repository Layer (with custom JPQL join)</li>
+        <li>Service Layer (business logic)</li>
+        <li>Controller Layer (HTTP endpoints)</li>
+        <li>JSP Views (UI screenshots)</li>
+      </ol>
+    </li>
+    <li><strong>CRUD Operations with Screenshots</strong></li>
+    <li><strong>Unit Tests</strong></li>
+    <li><strong>Challenges &amp; Solutions</strong></li>
+    <li><strong>GitHub Repository</strong></li>
+  </ol>
+</div>
+
+<!-- SECTION 1: ERD -->
+<section>
+  <h2 class="section-title">1 · Entity Relationship Design</h2>
+  <p>The application models two core entities — <strong>Author</strong> and <strong>Book</strong> — with a <strong>One-to-Many</strong> relationship: one author can write many books, but each book belongs to exactly one author.</p>
+
+  <div class="erd">
++------------------+          +-------------------+
+|     AUTHORS      |          |       BOOKS       |
++------------------+          +-------------------+
+| PK  id (BIGINT)  |1       ∞| PK  id (BIGINT)   |
+|     name         |----------| FK  author_id     |
+|     email UNIQUE |          |     title         |
+|     nationality  |          |     genre         |
+|     birth_year   |          |     published_year|
++------------------+          |     price DECIMAL |
+                               +-------------------+
+
+Relationship: Author (1) ──────────────── Book (∞)
+  • One Author → Many Books  (@OneToMany)
+  • Many Books → One Author  (@ManyToOne + @JoinColumn)
+  • Cascade: ALL  |  OrphanRemoval: true</div>
+
+  <h3>JPA Mapping Strategy</h3>
+  <table>
+    <tr><th>Annotation</th><th>Location</th><th>Purpose</th></tr>
+    <tr><td>@OneToMany(mappedBy="author", cascade=ALL)</td><td>Author entity</td><td>Author owns the relationship; cascades saves/deletes to books</td></tr>
+    <tr><td>@ManyToOne(fetch=EAGER)</td><td>Book entity</td><td>Each book holds a reference to its Author</td></tr>
+    <tr><td>@JoinColumn(name="author_id")</td><td>Book entity</td><td>Creates the FK column in the books table</td></tr>
+    <tr><td>@Column(unique=true)</td><td>Author.email</td><td>Enforces unique email at DB level</td></tr>
+  </table>
+</section>
+
+<!-- SECTION 2: ARCHITECTURE -->
+<section>
+  <h2 class="section-title">2 · Architecture Overview</h2>
+  <p>The application follows a classic <strong>layered (n-tier) architecture</strong> with clear separation of concerns:</p>
+
+  <div class="layer-card"><h4>🗃 Entity Layer</h4><p>JPA-annotated POJOs (Author, Book) mapped to MySQL tables. Validation via Jakarta Bean Validation (@NotBlank, @Email, @Positive).</p></div>
+  <div class="layer-card"><h4>📦 Repository Layer</h4><p>Interfaces extending JpaRepository — provides CRUD for free. BookRepository adds a custom JPQL INNER JOIN query returning a projection (BookAuthorDTO).</p></div>
+  <div class="layer-card"><h4>⚙️ Service Layer</h4><p>@Service classes wrap repositories, enforce business rules, throw EntityNotFoundException when records are missing, and manage @Transactional boundaries.</p></div>
+  <div class="layer-card"><h4>🌐 Controller Layer</h4><p>@Controller classes handle HTTP GET/POST requests, populate the Spring Model with data, and return JSP view names. Exception handling is delegated to GlobalExceptionHandler.</p></div>
+  <div class="layer-card"><h4>🖥 View Layer (JSP/JSTL)</h4><p>Server-rendered pages under /WEB-INF/views/. A shared header.jsp (included via <%@ include %>) provides the navigation bar and full CSS design system.</p></div>
+  <div class="layer-card"><h4>🛡 Exception Handler</h4><p>@ControllerAdvice (GlobalExceptionHandler) intercepts DataIntegrityViolationException and EntityNotFoundException globally, redirecting users to a friendly error page.</p></div>
+</section>
+
+<!-- SECTION 3: IMPLEMENTATION -->
+<section>
+  <h2 class="section-title">3 · Implementation Details</h2>
+
+  <h3>3.1 Database Setup – application.properties</h3>
+  <div class="code-block"><span class="cm"># MySQL datasource (XAMPP default – no password)</span>
+spring.datasource.url=jdbc:mysql://localhost:3306/university_bookstore
+    ?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=
+
+<span class="cm"># Hibernate auto-creates/updates tables from entity classes</span>
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+<span class="cm"># JSP view resolver</span>
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp</div>
+
+  <h3>3.2 DataInitializer – Seeding Sample Data</h3>
+  <p>A <code>CommandLineRunner</code> bean inserts 10 Authors and 10 Books on startup, but only if tables are empty (idempotent).</p>
+  <div class="code-block"><span class="an">@Component</span>
+<span class="kw">public class</span> <span class="cl">DataInitializer</span> <span class="kw">implements</span> <span class="cl">CommandLineRunner</span> {
+    <span class="an">@Override</span>
+    <span class="kw">public void</span> run(String... args) {
+        <span class="kw">if</span> (authorRepository.count() > 0) { <span class="kw">return</span>; } <span class="cm">// skip if data exists</span>
+        Author a1 = authorRepository.save(<span class="kw">new</span> Author(<span class="st">"George Orwell"</span>, <span class="st">"orwell@literature.com"</span>, <span class="st">"British"</span>, 1903));
+        bookRepository.save(<span class="kw">new</span> Book(<span class="st">"1984"</span>, <span class="st">"Dystopian"</span>, 1949, <span class="kw">new</span> BigDecimal(<span class="st">"12.99"</span>), a1));
+        <span class="cm">// ... 9 more authors and books</span>
+    }
+}</div>
+
+  <h3>3.3 Repository Layer – Custom JPQL Inner Join</h3>
+  <div class="code-block"><span class="an">@Repository</span>
+<span class="kw">public interface</span> <span class="cl">BookRepository</span> <span class="kw">extends</span> <span class="cl">JpaRepository</span>&lt;Book, Long&gt; {
+
+    <span class="an">@Query</span>(<span class="st">"SELECT b.title AS bookTitle, a.name AS authorName, "</span> +
+           <span class="st">"b.id AS bookId, b.genre AS genre, b.publishedYear AS publishedYear, "</span> +
+           <span class="st">"b.price AS price FROM Book b INNER JOIN b.author a"</span>)
+    <span class="cl">List</span>&lt;<span class="cl">BookAuthorDTO</span>&gt; findAllBooksWithAuthors();
+}</div>
+  <p>The query uses <strong>JPQL INNER JOIN</strong> (not SQL) and returns an <strong>interface-based projection</strong> (BookAuthorDTO) — Spring Data automatically proxies the interface and maps each alias to a getter.</p>
+
+  <h3>3.4 Service Layer</h3>
+  <div class="code-block"><span class="an">@Service</span> <span class="an">@Transactional</span>
+<span class="kw">public class</span> <span class="cl">BookService</span> {
+    <span class="kw">public</span> Book findById(Long id) {
+        <span class="kw">return</span> bookRepository.findById(id)
+            .orElseThrow(() -&gt; <span class="kw">new</span> <span class="cl">EntityNotFoundException</span>(<span class="st">"Book not found: "</span> + id));
+    }
+    <span class="kw">public</span> Book update(Long id, Book updated) {
+        Book existing = findById(id);        <span class="cm">// throws if missing</span>
+        existing.setTitle(updated.getTitle());
+        existing.setPrice(updated.getPrice());
+        <span class="cm">// ... set other fields</span>
+        <span class="kw">return</span> bookRepository.save(existing);
+    }
+}</div>
+
+  <h3>3.5 Controller Layer</h3>
+  <div class="code-block"><span class="an">@Controller</span> <span class="an">@RequestMapping</span>(<span class="st">"/books"</span>)
+<span class="kw">public class</span> <span class="cl">BookController</span> {
+    <span class="an">@GetMapping</span>                    <span class="cm">// GET /books</span>
+    <span class="kw">public</span> String listBooks(Model model) {
+        model.addAttribute(<span class="st">"books"</span>, bookService.findAllBooksWithAuthors());
+        <span class="kw">return</span> <span class="st">"books/list"</span>;
+    }
+    <span class="an">@PostMapping</span>(<span class="st">"/add"</span>)            <span class="cm">// POST /books/add</span>
+    <span class="kw">public</span> String addBook(<span class="an">@Valid</span> Book book, BindingResult br,
+                           <span class="an">@RequestParam</span> Long authorId,
+                           RedirectAttributes ra) {
+        <span class="kw">if</span> (br.hasErrors()) <span class="kw">return</span> <span class="st">"books/form"</span>;
+        book.setAuthor(authorService.findById(authorId));
+        bookService.save(book);
+        ra.addFlashAttribute(<span class="st">"successMessage"</span>, <span class="st">"Book added!"</span>);
+        <span class="kw">return</span> <span class="st">"redirect:/books"</span>;
+    }
+}</div>
+</section>
+
+<!-- SECTION 4: SCREENSHOTS -->
+<section>
+  <h2 class="section-title">4 · CRUD Operations – Screenshots</h2>
+
+  <h3>Books List (GET /books) — Inner Join Query Result</h3>
+  <img src="screenshot_books.png" class="screenshot" alt="Books List Page">
+  <p class="caption">Figure 1: Books list page showing title, genre, year, price and author name sourced from the custom JPQL INNER JOIN query. Each row has Edit and Delete actions.</p>
+
+  <h3>Authors List (GET /authors)</h3>
+  <img src="screenshot_authors.png" class="screenshot" alt="Authors List Page">
+  <p class="caption">Figure 2: Authors directory displaying all 10 seeded authors with nationality badges, email addresses, and CRUD action buttons.</p>
+
+  <h3>Add New Book Form (GET /books/add)</h3>
+  <img src="screenshot_add_book.png" class="screenshot" alt="Add Book Form">
+  <p class="caption">Figure 3: Add Book form with fields for title, genre, published year, price, and an author dropdown populated dynamically from the database.</p>
+
+  <h3>CRUD Endpoint Summary</h3>
+  <table>
+    <tr><th>Method</th><th>URL</th><th>Operation</th></tr>
+    <tr><td>GET</td><td>/books</td><td>List all books (inner join query)</td></tr>
+    <tr><td>GET</td><td>/books/add</td><td>Show add form</td></tr>
+    <tr><td>POST</td><td>/books/add</td><td>Save new book</td></tr>
+    <tr><td>GET</td><td>/books/edit/{id}</td><td>Show pre-filled edit form</td></tr>
+    <tr><td>POST</td><td>/books/edit/{id}</td><td>Update book</td></tr>
+    <tr><td>GET</td><td>/books/delete/{id}</td><td>Delete book</td></tr>
+    <tr><td>GET</td><td>/authors</td><td>List all authors</td></tr>
+    <tr><td>GET</td><td>/authors/add</td><td>Show add form</td></tr>
+    <tr><td>POST</td><td>/authors/add</td><td>Save new author</td></tr>
+    <tr><td>GET</td><td>/authors/edit/{id}</td><td>Show pre-filled edit form</td></tr>
+    <tr><td>POST</td><td>/authors/edit/{id}</td><td>Update author</td></tr>
+    <tr><td>GET</td><td>/authors/delete/{id}</td><td>Delete author</td></tr>
+  </table>
+</section>
+
+<!-- SECTION 5: TESTS -->
+<section>
+  <h2 class="section-title">5 · Unit Tests</h2>
+  <p>Tests are written with <strong>JUnit 5</strong> and <strong>Mockito</strong>. Repository tests use <code>@DataJpaTest</code> with an H2 in-memory database (no MySQL needed). Service tests mock the repository layer.</p>
+
+  <div class="code-block"><span class="cm">// BookRepositoryTest — @DataJpaTest with H2</span>
+<span class="an">@Test</span>
+<span class="an">@DisplayName</span>(<span class="st">"findAllBooksWithAuthors() inner join returns correct projections"</span>)
+<span class="kw">void</span> testFindAllBooksWithAuthors() {
+    List&lt;BookAuthorDTO&gt; results = bookRepository.findAllBooksWithAuthors();
+    assertThat(results).hasSize(2);
+    assertThat(results).extracting(BookAuthorDTO::getAuthorName).containsOnly(<span class="st">"Test Author"</span>);
+}
+
+<span class="cm">// BookServiceTest — Mockito</span>
+<span class="an">@Test</span>
+<span class="an">@DisplayName</span>(<span class="st">"findById() throws EntityNotFoundException when not found"</span>)
+<span class="kw">void</span> testFindById_notFound() {
+    when(bookRepository.findById(99L)).thenReturn(Optional.empty());
+    assertThatThrownBy(() -&gt; bookService.findById(99L))
+        .isInstanceOf(EntityNotFoundException.class)
+        .hasMessageContaining(<span class="st">"Book not found"</span>);
+}</div>
+
+  <table>
+    <tr><th>Test Class</th><th>Tests</th><th>Result</th></tr>
+    <tr class="test-row"><td>BookRepositoryTest</td><td>findAll(), findAllBooksWithAuthors()</td><td>✅ PASSED</td></tr>
+    <tr class="test-row"><td>BookServiceTest</td><td>findAll, findById, save, update, deleteById, not-found exception</td><td>✅ PASSED</td></tr>
+    <tr class="test-row"><td>AuthorServiceTest</td><td>findAll, findById, save, update, deleteById, not-found exception</td><td>✅ PASSED</td></tr>
+    <tr><td colspan="2"><strong>Total</strong></td><td><strong>14 / 14 PASSED</strong></td></tr>
+  </table>
+</section>
+
+<!-- SECTION 6: CHALLENGES -->
+<section>
+  <h2 class="section-title">6 · Challenges Faced &amp; Solutions</h2>
+
+  <div class="challenge-box">
+    <h4>⚠ Challenge 1: JSP Support in Spring Boot 3 (Jakarta EE namespace migration)</h4>
+    <p>Spring Boot 3 migrated from <code>javax.*</code> to <code>jakarta.*</code>. The traditional JSTL dependency (<code>javax.servlet.jsp.jstl</code>) caused <code>ClassNotFoundException</code> at runtime, and the old taglib URI <code>http://java.sun.com/jsp/jstl/core</code> was unresolvable.</p>
+  </div>
+  <div class="solution-box">
+    <h4>✅ Solution</h4>
+    <p>Switched to <code>org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1</code> and updated all JSP taglib declarations to use <code>uri="jakarta.tags.core"</code>. Also added <code>tomcat-embed-jasper</code> as a <code>provided</code> scope dependency and changed packaging to WAR with <code>SpringBootServletInitializer</code>.</p>
+  </div>
+
+  <div class="challenge-box">
+    <h4>⚠ Challenge 2: JSP Directive Inside HTML Comment Caused Parse Error</h4>
+    <p>The shared <code>header.jsp</code> had an HTML comment containing <code>&lt;%@ include %&gt;</code> as example text. The Jasper JSP engine treated it as a real directive and threw: <em>"Include directive: Mandatory attribute [file] missing"</em>, causing a 500 error on every page.</p>
+  </div>
+  <div class="solution-box">
+    <h4>✅ Solution</h4>
+    <p>Replaced the HTML comment <code>&lt;!-- ... --&gt;</code> with a JSP comment <code>&lt;%-- ... --%&gt;</code>. JSP comments are stripped by the parser before directive processing, so JSP syntax inside them is never evaluated.</p>
+  </div>
+
+  <div class="challenge-box">
+    <h4>⚠ Challenge 3: favicon.ico Request Triggering Error Page</h4>
+    <p>Every browser automatically requests <code>/favicon.ico</code>. Since no favicon existed, Spring threw <code>NoResourceFoundException</code>. Our catch-all <code>@ExceptionHandler(Exception.class)</code> intercepted it and redirected users to the error page with a confusing message.</p>
+  </div>
+  <div class="solution-box">
+    <h4>✅ Solution</h4>
+    <p>Added a dedicated <code>@ExceptionHandler(NoResourceFoundException.class)</code> in <code>GlobalExceptionHandler</code> that re-throws the exception, allowing Spring's default 404 mechanism to handle it silently — the browser ignores the 404 for favicon requests.</p>
+  </div>
+
+  <div class="challenge-box">
+    <h4>⚠ Challenge 4: MySQL Authentication Error (XAMPP Default vs. Configured Password)</h4>
+    <p><code>application.properties</code> was initially configured with <code>password=root</code>, but XAMPP MySQL ships with the root account having no password by default, causing <em>"Access denied for user 'root'@'localhost'"</em>.</p>
+  </div>
+  <div class="solution-box">
+    <h4>✅ Solution</h4>
+    <p>Changed <code>spring.datasource.password=</code> (empty) to match XAMPP's default. As a best practice, documented that production deployments should set a strong password.</p>
+  </div>
+</section>
+
+<!-- SECTION 7: GITHUB -->
+<section>
+  <h2 class="section-title">7 · GitHub Repository</h2>
+  <p>The complete source code for this project is available on GitHub. The repository includes all source files, the Maven build configuration, JSP views, unit tests, and this documentation.</p>
+  <div class="github-box">
+    <p style="color:#94a3b8;margin-bottom:.5rem;font-size:.85rem">🔗 Project Repository</p>
+    <a href="https://github.com/YOUR_USERNAME/university-bookstore">https://github.com/YOUR_USERNAME/university-bookstore</a>
+    <p style="color:#64748b;font-size:.78rem;margin-top:.8rem">Replace YOUR_USERNAME with your GitHub username after pushing the project</p>
+  </div>
+
+  <h3>How to Push to GitHub</h3>
+  <div class="code-block"><span class="cm"># In the project folder (C:\Users\chara\Downloads\sga)</span>
+git init
+git add .
+git commit -m "University Bookstore Spring Boot CRUD Application"
+git remote add origin https://github.com/YOUR_USERNAME/university-bookstore.git
+git push -u origin main</div>
+</section>
+
+<div style="text-align:center;padding:2rem;color:#94a3b8;font-size:.8rem;border-top:1px solid #e2e8f0;margin-top:2rem">
+  University Bookstore – Spring Boot Assignment &nbsp;|&nbsp; Generated May 2026
+</div>
+
+</body>
+</html>
